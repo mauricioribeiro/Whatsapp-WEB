@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Conexões{% endblock %}
+{% block content %}
+
+    <h1>Conexões</h1>
+    <hr>
+
+    {%  if error %}
+        <div class="alert alert-primary" role="alert">
+            Falha ao se conectar com a API
+        </div>
+    {% endif %}
+
+    {% if instances %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr {% for instance in instances %}>
+                    <td>{{ instance.name }}</td>
+                    <td>{{ instance.status }}</td>
+                    <td><button>Visualizar</button></td>
+                </tr {% endfor %}>
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-dark" role="alert">
+          Sem conexões ativas
+        </div>
+    {% endif %}
+
+{% endblock %}

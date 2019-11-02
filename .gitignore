@@ -1,0 +1,5 @@
+.idea
+*.pyc
+*.jpg
+versao.properties
+*.log
