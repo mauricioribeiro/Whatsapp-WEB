@@ -7,25 +7,27 @@
             <h1>Conexões</h1>
             <hr>
 
-            <div class="alert alert-primary" role="alert" ng-if="error">
+            <div class="alert alert-danger" role="alert" ng-if="error">
                 Falha ao se conectar com a API
             </div>
 
             <div class="row" ng-if="!error">
                 <div class="col-sm-8">
-                    <table ng-if="instances">
-                        <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
+                    <table class="table" ng-if="instances">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr ng-for="instance in instances">
-                                <td>{{ instance.name }}</td>
-                                <td>{{ instance.status }}</td>
-                                <td><button>Visualizar</button></td>
+                            <tr ng-repeat="instance in instances">
+                                <td>{{ instance.instance }}</td>
+                                <td ng-bind-html="instance.status | status"></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary">Visualizar</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -40,9 +42,14 @@
                             <p class="card-text">
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" ng-model="newInstance" id="instance" placeholder="Nome da instância">
+                                        <input type="text"
+                                               class="form-control"
+                                               ng-model="input.instance"
+                                               placeholder="Nome da instância">
                                     </div>
-                                    <button class="btn btn-primary">Criar</button>
+                                    <button class="btn btn-primary"
+                                            ng-disabled="!input.instance"
+                                            ng-click="start()">Criar</button>
                                 </form>
                             </p>
                         </div>
@@ -54,5 +61,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="static/js/home-controller.js"></script>
+    <script src="static/js/home.controller.js"></script>
 {% endblock %}
