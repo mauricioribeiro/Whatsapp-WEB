@@ -2,36 +2,57 @@
 {% block title %}Conexões{% endblock %}
 {% block content %}
 
-    <h1>Conexões</h1>
-    <hr>
+    {% raw %}
+        <div ng-controller="HomeController">
+            <h1>Conexões</h1>
+            <hr>
 
-    {%  if error %}
-        <div class="alert alert-primary" role="alert">
-            Falha ao se conectar com a API
+            <div class="alert alert-primary" role="alert" ng-if="error">
+                Falha ao se conectar com a API
+            </div>
+
+            <div class="row" ng-if="!error">
+                <div class="col-sm-8">
+                    <table ng-if="instances">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-for="instance in instances">
+                                <td>{{ instance.name }}</td>
+                                <td>{{ instance.status }}</td>
+                                <td><button>Visualizar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="alert alert-dark" role="alert" ng-if="!instances">
+                        Sem conexões ativas
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" ng-model="newInstance" id="instance" placeholder="Nome da instância">
+                                    </div>
+                                    <button class="btn btn-primary">Criar</button>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
+    {% endraw %}
+{% endblock %}
 
-    {% if instances %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr {% for instance in instances %}>
-                    <td>{{ instance.name }}</td>
-                    <td>{{ instance.status }}</td>
-                    <td><button>Visualizar</button></td>
-                </tr {% endfor %}>
-            </tbody>
-        </table>
-    {% else %}
-        <div class="alert alert-dark" role="alert">
-          Sem conexões ativas
-        </div>
-    {% endif %}
-
+{% block scripts %}
+    <script src="static/js/home-controller.js"></script>
 {% endblock %}
