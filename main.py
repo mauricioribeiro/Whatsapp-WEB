@@ -8,6 +8,6 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/instances/<instance>')
+@app.route('/conexoes/<instance>')
 def detail(instance):
-    return render_template('detail.html', instance=instance)
+    return render_template('instance.html', instance=instance)

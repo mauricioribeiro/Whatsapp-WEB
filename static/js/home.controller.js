@@ -1,6 +1,4 @@
-angular.module('whatsapp').controller('HomeController', ($http, $scope) => {
-    const api = 'http://localhost:8080/api';
-
+angular.module('whatsapp').controller('HomeController', (API_URL, $http, $scope) => {
     $scope.error = false;
     $scope.instances = [];
     $scope.input = {
@@ -9,7 +7,7 @@ angular.module('whatsapp').controller('HomeController', ($http, $scope) => {
 
     $scope.list = () => {
         $http({
-            url: api + '/instances'
+            url: API_URL + '/instances'
         }).then((response) => {
             $scope.instances = response.data.instances || [];
         }).catch(() => {
@@ -19,7 +17,7 @@ angular.module('whatsapp').controller('HomeController', ($http, $scope) => {
 
     $scope.start = () => {
         $http({
-            url: api + '/start/' + $scope.input.instance,
+            url: API_URL + '/start/' + $scope.input.instance,
             method: 'POST'
         }).then((response) => {
             $scope.input.instance = null;

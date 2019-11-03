@@ -26,7 +26,8 @@
                                 <td>{{ instance.instance }}</td>
                                 <td ng-bind-html="instance.status | status"></td>
                                 <td>
-                                    <button class="btn btn-sm btn-secondary">Visualizar</button>
+                                    <a href="/conexoes/{{ instance.instance }}"
+                                       class="btn btn-sm btn-secondary">Visualizar</a>
                                 </td>
                             </tr>
                         </tbody>

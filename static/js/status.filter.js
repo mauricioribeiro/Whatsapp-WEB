@@ -8,8 +8,8 @@ angular.module('whatsapp').filter('status', ($sce) => {
         if (status === 'READY')
             label = '<span class="badge badge-info">Aguardando QR</span>';
 
-        if (status === 'ONLINE')
-            label = '<span class="badge badge-success">Online</span>';
+        if (status === 'CONNECTED')
+            label = '<span class="badge badge-success">Conectado</span>';
 
         if (status === 'OFFLINE')
             label = '<span class="badge badge-secondary">Offline</span>';

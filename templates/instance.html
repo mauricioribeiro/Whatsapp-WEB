@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Detalhes da Conexão{% endblock %}
+{% block content %}
+
+    {% raw %}
+        <div ng-controller="InstanceController">
+            <h1>Conexão <b>{{ instance.instance }}</b>
+                <small ng-bind-html="instance.status | status "></small>
+                <img ng-if="instance.platform"
+                     src="static/{{ instance.platform }}.svg" width="30" height="30" class="d-inline-block" alt="">
+            </h1>
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="alert alert-secondary" role="alert" ng-if="!instance.screenshot">
+                        Conexão sem screenshot
+                    </div>
+
+                    <img class="img-fluid rounded"
+                         src="data:image/png;base64,{{ instance.screenshot }}"
+                         ng-if="instance.screenshot"
+                         alt="Screenshot">
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Envio Unitário
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               ng-model="input.msg.to"
+                                               placeholder="Para"
+                                               title="Ex:12 98216-6190">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea
+                                               class="form-control"
+                                               ng-model="input.msg.message"
+                                               placeholder="Mensagem"></textarea>
+                                    </div>
+                                    <button class="btn btn-primary"
+                                            ng-disabled="!canSend()"
+                                            ng-click="send()">Enviar</button>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            Envio Múltiplo
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <form>
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input">
+                                      <label class="btn btn-primary custom-file-label" data-browser="Importar"></label>
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endraw %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="static/js/instance.controller.js"></script>
+{% endblock %}
