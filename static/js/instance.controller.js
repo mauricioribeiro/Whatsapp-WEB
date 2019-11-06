@@ -8,12 +8,21 @@ angular.module('whatsapp').controller('InstanceController', (API_URL, $http, $sc
         file: null
     };
 
+    let socket = io('http://localhost:8001');
+
     $scope.get = () => {
         let params = $location.absUrl().split('/');
 
         $http.get(API_URL + '/status/' + params[params.length - 1])
             .then((response) => {
-            $scope.instance = response.data;
+                $scope.instance = response.data;
+
+                socket.emit('subscribe', {channel: '/instances/' + $scope.instance.instance });
+                socket.on('checkin', function (instance) {
+                    console.log(instance);
+                    $scope.instance = instance;
+                    $scope.$apply();
+                });
         });
     };
 
