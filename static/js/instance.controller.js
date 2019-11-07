@@ -18,10 +18,14 @@ angular.module('whatsapp').controller('InstanceController', (API_URL, $http, $sc
                 $scope.instance = response.data;
 
                 socket.emit('subscribe', {channel: '/instances/' + $scope.instance.instance });
-                socket.on('checkin', function (instance) {
-                    console.log(instance);
+
+                socket.on('checkin', (instance) => {
                     $scope.instance = instance;
                     $scope.$apply();
+                });
+
+                socket.on('receive', (message) => {
+                    console.log(message);
                 });
         });
     };

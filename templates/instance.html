@@ -7,7 +7,7 @@
             <h1>Conexão <b>{{ instance.instance }}</b>
                 <small ng-bind-html="instance.status | status "></small>
                 <img ng-if="instance.platform"
-                     src="static/{{ instance.platform }}.svg" width="30" height="30" class="d-inline-block" alt="">
+                     src="{{ 'static/' + instance.platform + '.svg' }}" width="30" height="30" class="d-inline-block" alt="">
             </h1>
             <hr>
 
@@ -58,10 +58,15 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                <form>
-                                    <div class="custom-file">
-                                      <input type="file" class="custom-file-input">
-                                      <label class="btn btn-primary custom-file-label" data-browse="Importar"></label>
+                                <form method="post" action="{{ '/instancias/' + instance.instance + '/upload' }}" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="file" accept=".csv" class="custom-file-input">
+                                            <label class="btn custom-file-label" data-browse="Procurar"></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Enviar</button>
                                     </div>
                                 </form>
                             </p>
