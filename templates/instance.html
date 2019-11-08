@@ -7,7 +7,11 @@
             <h1>Conexão <b>{{ instance.instance }}</b>
                 <small ng-bind-html="instance.status | status "></small>
                 <img ng-if="instance.platform"
-                     src="{{ 'static/' + instance.platform + '.svg' }}" width="30" height="30" class="d-inline-block" alt="">
+                     src="{{ 'static/' + instance.platform + '.svg' }}"
+                     width="30"
+                     height="30"
+                     class="d-inline-block"
+                     alt="Plataforma"/>
             </h1>
             <hr>
 
@@ -18,9 +22,45 @@
                     </div>
 
                     <img class="img-fluid rounded"
-                         src="data:image/png;base64,{{ instance.screenshot }}"
-                         ng-if="instance.screenshot"
-                         alt="Screenshot">
+                         src="{{ getImage(instance.screenshot) }}"
+                         ng-show="instance.screenshot"
+                         ng-if="instance.screenshot && instance.status !== 'CONNECTED'"
+                         alt="Screenshot"/>
+
+                    <table class="table" ng-if="instance.status === 'CONNECTED'">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th></th>
+                                <th>Recebido por</th>
+                                <th>Número</th>
+                                <th>Tipo</th>
+                                <th>Mensagem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="message in messages">
+                                <td>
+                                    <img ng-if="message.pic"
+                                         src="{{ getImage(message.pic) }}"
+                                         ng-show="message.pic"
+                                         width="50"
+                                         height="50"
+                                         class="rounded"/>
+                                </td>
+                                <td>{{ message.name }}</td>
+                                <td>{{ message.from }}</td>
+                                <td>{{ message.type }}</td>
+                                <td>
+                                    <img class="rounded"
+                                         src="{{ getImage(message.message) }}"
+                                         ng-if="isImage(message.message)"
+                                         ng-show="message.message"/>
+                                    <p ng-if="message.message && !isImage(message.message)">{{ message.message }}</p>
+                                    <span ng-if="!message.message" class="badge badge-dark">Indisponível</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="col-sm-4">
@@ -69,6 +109,20 @@
                                         <button class="btn btn-primary" type="submit">Enviar</button>
                                     </div>
                                 </form>
+                            </p>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="card">
+                        <div class="card-header">
+                            Ações
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <div class="form-group">
+                                    <button class="btn btn-danger" ng-click="stop()">Reiniciar</button>
+                                </div>
                             </p>
                         </div>
                     </div>
