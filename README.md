@@ -17,10 +17,12 @@ to connect to https://github.com/mauricioribeiro/Whatsapp-API (private project).
 ### Screenshots
 Instances list
 <img src="home.png">
+<br>
 Waiting for QR Code
 <img src="instance.png">
+<br>
 Connected
 <img src="instance2.png">
 
 ### Contact
-If you're interested, feel free to contact me by mauricioribeiro1992@gmail.com 
+If you're interested, feel free to contact me at mauricioribeiro1992@gmail.com 
