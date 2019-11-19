@@ -2,13 +2,13 @@
 
 ### About
 This project is only a web demo application in Flask + AngularJS 
-to connect to https://github.com/mauricioribeiro/Whatsapp-API (private project).
+to connect to [Whatsapp Private API](https://github.com/mauricioribeiro/Whatsapp-API).
 
 ### Features
- - Sends message
- - Sends messages in batch mode (from .csv file)
- - Receives messages by configured webhook
- - Receives messages by configured socket.io channel (like websocket)
+ - Sends single message
+ - Sends multiple messages in batch mode (from .csv file)
+ - Receives messages via configured webhook
+ - Receives messages via configured socket.io channel (like websocket)
  - Stores scanned device information (platform, battery level, number)
  - Stores raw data from received messages (user profile, name, number)
  - Keeps device logged even if service stops
