@@ -5,13 +5,13 @@ angular.module('whatsapp').filter('status', ($sce) => {
         if (status === 'STARTING')
             label = '<span class="badge badge-warning">Iniciando</span>';
 
-        if (status === 'READY')
+        if (status === 'QR_CODE')
             label = '<span class="badge badge-info">Aguardando QR</span>';
 
         if (status === 'CONNECTED')
             label = '<span class="badge badge-success">Conectado</span>';
 
-        if (status === 'OFFLINE')
+        if (status === 'DISCONNECTED')
             label = '<span class="badge badge-secondary">Offline</span>';
 
         return $sce.trustAsHtml(label);

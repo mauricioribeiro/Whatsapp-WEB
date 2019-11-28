@@ -23,10 +23,10 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="instance in instances">
-                                <td>{{ instance.instance }}</td>
+                                <td>{{ instance.name }}</td>
                                 <td ng-bind-html="instance.status | status"></td>
                                 <td>
-                                    <a href="/instancias/{{ instance.instance }}"
+                                    <a href="/instancias/{{ instance.name }}"
                                        class="btn btn-sm btn-secondary">Visualizar</a>
                                 </td>
                             </tr>

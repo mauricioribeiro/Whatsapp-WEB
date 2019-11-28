@@ -4,7 +4,7 @@
 
     {% raw %}
         <div ng-controller="InstanceController">
-            <h1>Conexão <b>{{ instance.instance }}</b>
+            <h1>Conexão <b>{{ instance.name }}</b>
                 <small ng-bind-html="instance.status | status "></small>
                 <img ng-if="instance.platform"
                      src="{{ 'static/' + instance.platform + '.svg' }}"
@@ -98,7 +98,7 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                <form method="post" action="{{ '/instancias/' + instance.instance + '/upload' }}" enctype="multipart/form-data">
+                                <form method="post" action="{{ '/instancias/' + instance.name + '/upload' }}" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <div class="custom-file">
                                             <input type="file" name="file" accept=".csv" class="custom-file-input">

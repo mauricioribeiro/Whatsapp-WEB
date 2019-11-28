@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import codecs, requests, csv
 
 app = Flask(__name__)
-API_URL = 'http://localhost:8080/api'
+API_URL = 'http://localhost:8000/api'
 
 
 @app.route('/')

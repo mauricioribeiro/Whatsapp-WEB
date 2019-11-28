@@ -18,7 +18,7 @@ angular.module('whatsapp').controller('InstanceController', (API_URL, $http, $sc
             .then((response) => {
                 $scope.instance = response.data;
 
-                socket.emit('subscribe', {channel: '/instances/' + $scope.instance.instance });
+                socket.emit('subscribe', {channel: '/instances/' + $scope.instance.name });
 
                 socket.on('checkin', (instance) => {
                     console.log(instance);
@@ -42,14 +42,14 @@ angular.module('whatsapp').controller('InstanceController', (API_URL, $http, $sc
         let msg = $scope.input.msg;
         msg.to = '55' + msg.to;
 
-        $http.post(API_URL + '/send/' + $scope.instance.instance, msg)
+        $http.post(API_URL + '/send/' + $scope.instance.name, msg)
             .then((response) => {
                 alert('Mensagem enviada!');
             });
     };
 
     $scope.stop = () => {
-        $http.post(API_URL + '/stop/' + $scope.instance.instance)
+        $http.post(API_URL + '/stop/' + $scope.instance.name)
             .then((response) => {
                 alert('Instancia reiniciada!');
             });
